@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>德州扑克 SNG 大屏</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <main class="stage">
+      <section class="hero-card">
+        <div class="hero-top">
+          <div>
+            <p class="eyebrow">9 人座 SNG</p>
+            <h1 id="levelLabel">级别 1</h1>
+          </div>
+          <button id="fullscreenBtn" class="ghost-btn">全屏投屏</button>
+        </div>
+
+        <div class="hero-grid">
+          <article class="stat-panel timer-panel">
+            <p class="panel-title">剩余时间</p>
+            <div id="timerDisplay" class="timer-display">15:00</div>
+            <div class="timer-actions">
+              <button id="startPauseBtn" class="primary-btn">开始</button>
+              <button id="resetTimerBtn" class="ghost-btn">重置本级</button>
+            </div>
+          </article>
+
+          <article class="stat-panel blinds-panel">
+            <p class="panel-title">当前盲注</p>
+            <div class="blinds-main">
+              <span id="smallBlindValue">100</span>
+              <span class="divider">/</span>
+              <span id="bigBlindValue">200</span>
+            </div>
+            <p id="anteValue" class="subline">Ante 0</p>
+            <p id="breakBadge" class="badge hidden">休息时间</p>
+          </article>
+
+          <article class="stat-panel info-panel">
+            <p class="panel-title">比赛信息</p>
+            <div class="info-line"><span>剩余玩家</span><strong id="playersLeftValue">9 / 9</strong></div>
+            <div class="info-line"><span>下一盲注</span><strong id="nextLevelValue">200 / 400</strong></div>
+            <div class="info-line"><span>平均记分牌</span><strong id="avgStackValue">1,667</strong></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="table-card">
+        <div class="table-surface">
+          <div class="table-ring"></div>
+          <div id="seats" class="seats"></div>
+          <div class="table-center">
+            <p>德州扑克 SNG</p>
+            <strong id="tableCenterSummary">9 人在桌</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <aside class="control-rail">
+      <section class="rail-card">
+        <div class="card-head">
+          <h2>比赛控制</h2>
+        </div>
+        <div class="stack">
+          <div class="button-row">
+            <button id="prevLevelBtn" class="ghost-btn">上一级</button>
+            <button id="nextLevelBtn" class="primary-btn">下一级</button>
+          </div>
+          <div class="button-row">
+            <button id="addMinuteBtn" class="ghost-btn">+1 分钟</button>
+            <button id="subtractMinuteBtn" class="ghost-btn">-1 分钟</button>
+          </div>
+          <div class="field-group">
+            <label for="startingStackInput">起始筹码</label>
+            <input id="startingStackInput" type="number" min="1000" step="500">
+          </div>
+          <div class="button-row">
+            <button id="resetPlayersBtn" class="ghost-btn">重置九人</button>
+            <button id="resetAllBtn" class="danger-btn">整场重置</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="rail-card">
+        <div class="card-head">
+          <h2>盲注计划</h2>
+          <button id="toggleEditorBtn" class="ghost-btn small-btn">展开/收起</button>
+        </div>
+        <div id="scheduleSummary" class="schedule-summary"></div>
+        <div id="editorPanel" class="editor-panel">
+          <div class="schedule-toolbar">
+            <button id="addLevelBtn" class="ghost-btn small-btn">新增级别</button>
+            <button id="addBreakBtn" class="ghost-btn small-btn">新增休息</button>
+            <button id="restoreDefaultsBtn" class="ghost-btn small-btn">恢复默认</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>级别</th>
+                  <th>小盲</th>
+                  <th>大盲</th>
+                  <th>Ante</th>
+                  <th>分钟</th>
+                  <th>类型</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody id="scheduleTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </aside>
+  </div>
+
+  <template id="seatTemplate">
+    <button class="seat" type="button">
+      <span class="seat-name"></span>
+      <span class="seat-status"></span>
+    </button>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
